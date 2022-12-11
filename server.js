@@ -17,4 +17,10 @@ app.get("/run", (req,res) => {
         res.send("<pre>" + stdout + "</pre>");
     })
 })
+
+app.get("/ps", (req,res) => {
+    exec("docker ps", (err, stdout, stderr) => {
+        res.send("<pre>" + stdout + "</pre>");
+    })
+})
 app.listen(3000, () => {console.log("container app tool started.")})
