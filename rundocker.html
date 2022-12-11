@@ -1,12 +1,41 @@
+<script>
+    function ContainerID(){
+        var cn = document.getElementById("incname").value;
+        var ci = document.getElementById("inimage").value;
+        
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById("crun").innerHTML = this.responseText;
+        }
+        xhttp.open("GET", "http://localhost:3000/run?cname=" + cn + "&cimage=" + ci);
+        xhttp.send();
+
+    }
+
+    function containerPS(){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            document.getElementById("cps").innerHTML = this.responseText;
+        }
+        xhttp.open("GET", "http://localhost:3000/ps");
+        xhttp.send();
+        
+    }
+</script>
+
 <h1> Launch Container </h1>
 
-<form action="/run" method="GET">
-    Name <input name ="cname" />
-    <br />
-    <select name = "cimage">
-        <option>centos</option>
-        <option>ubuntu</option>
-    </select>
-    <br />
-    <input type="submit" />
-</form>
+Name <input name ="cname" id="incname" />
+<br />
+Image Name : 
+<select name = "cimage" id="incimage">
+    <option>centos</option>
+    <option>ubuntu</option>
+</select>
+<br />
+
+<div id="crun"> Container Launch </div>
+<button onclick="ContainerID()"> Launch </button>
+
+<div id="cps"> Details </div>
+<button onclick="ContainerPS()">Refresh</button>

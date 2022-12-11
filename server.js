@@ -14,7 +14,7 @@ app.get("/run", (req,res) => {
     // res.send(cimage);
     exec('docker run -dit --name ' + cname + " " + cimage , (err, stdout, stderr) => {
         console.log(stdout);
-        res.send("<pre>" + stdout + "</pre> <a href='/ps'> Click Here</a>");
+        res.send("<pre>Container Launched Succesfully...." + "<br>" + "Container Id is  - " + stdout + "</pre>");
     })
 })
 
