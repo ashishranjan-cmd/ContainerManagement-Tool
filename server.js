@@ -27,12 +27,17 @@ app.get("/ps", (req,res) => {
         // console.log( stdout.split("\n")[1] );  // splitting the columns in docker ps command display page
 
         let a =  stdout.split("\n");  // storing the entire value in a variable
+        res.write("<table border='5'  align='center' width='50%'>"); // to get td and tr tag work inside the callback function
+        res.write("<tr><th>Container ID</th><th>Image Name</th><th>Command</th><th>Container Name</th></tr>")
+
+
         a.forEach(( cdetails) => { 
             cinfo = cdetails.trim().split(/\s+/) ;
             console.log(cinfo[0] + " " + cinfo[1] + " " + cinfo[2]);
-            res.write(cinfo[0] + " " + cinfo[1] + " " + cinfo[2])
+            res.write("<tr>" + "<td>" + cinfo[0] + "</td>" + "<td>" + cinfo[1] + "</td>" + "<td>"+ cinfo[2] + "<td>" + cinfo[cinfo.length -1] + "</td>"+"</td>" + "</tr>")
         })
         // res.send("<pre>" + stdout + "</pre>");
+        res.write("</table>")
         res.send();
     })
 })
