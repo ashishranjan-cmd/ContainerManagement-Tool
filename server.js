@@ -28,9 +28,12 @@ app.get("/ps", (req,res) => {
 
         let a =  stdout.split("\n");  // storing the entire value in a variable
         a.forEach(( cdetails) => { 
-            console.log(cdetails.trim().split(/\s+/)[1] );
+            cinfo = cdetails.trim().split(/\s+/) ;
+            console.log(cinfo[0] + " " + cinfo[1] + " " + cinfo[2]);
+            res.write(cinfo[0] + " " + cinfo[1] + " " + cinfo[2])
         })
-        res.send("<pre>" + stdout + "</pre>");
+        // res.send("<pre>" + stdout + "</pre>");
+        res.send();
     })
 })
 app.listen(3000, () => {console.log("container app tool started.")})
