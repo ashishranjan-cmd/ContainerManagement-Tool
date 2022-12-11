@@ -14,12 +14,12 @@ app.get("/run", (req,res) => {
     // res.send(cimage);
     exec('docker run -dit --name ' + cname + " " + cimage , (err, stdout, stderr) => {
         console.log(stdout);
-        res.send("<pre>" + stdout + "</pre>");
+        res.send("<pre>" + stdout + "</pre> <a href='/ps'> Click Here</a>");
     })
 })
 
 app.get("/ps", (req,res) => {
-    exec("docker ps", (err, stdout, stderr) => {
+    exec("docker ps | tail  -n +2 | awk '{ print $2 , $7, $10}'", (err, stdout, stderr) => {
         res.send("<pre>" + stdout + "</pre>");
     })
 })
