@@ -9,10 +9,10 @@ app.get("/runform", (req, res) => {
 
 app.get("/run", (req,res) => {
     const cname = req.query.cname;
-    // const cimage = req.query.cimage;
+    const cimage = req.query.cimage;
 
     // res.send(cimage);
-    exec(cname, (err, stdout, stderr) => {
+    exec('docker run -dit --name ' + cname + " " + cimage , (err, stdout, stderr) => {
         console.log(stdout);
         res.send("<pre>" + stdout + "</pre>");
     })
