@@ -19,7 +19,17 @@ app.get("/run", (req,res) => {
 })
 
 app.get("/ps", (req,res) => {
-    exec("docker ps | tail  -n +2 | awk '{ print $2 , $7, $10}'", (err, stdout, stderr) => {
+    // exec("docker ps | tail  -n +2 | awk '{ print $2 , $7, $10}'", (err, stdout, stderr) => {
+    //    res.send("<pre>" + stdout + "</pre>");
+    // })
+
+    exec("docker ps | tail -n +2" , (err, stdout, stderr) => {
+        // console.log( stdout.split("\n")[1] );  // splitting the columns in docker ps command display page
+
+        let a =  stdout.split("\n");  // storing the entire value in a variable
+        a.forEach(( cdetails) => { 
+            console.log(cdetails.trim().split(/\s+/)[1] );
+        })
         res.send("<pre>" + stdout + "</pre>");
     })
 })
